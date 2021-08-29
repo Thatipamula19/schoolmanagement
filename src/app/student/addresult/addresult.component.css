@@ -1,0 +1,32 @@
+.empControls{
+    width: 100%;
+    padding: 5%;
+}
+.empControls > * {
+    width: 100%;
+}
+
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: brown;
+    text-align: center;
+}
+.row{
+    background-color: rgba(211,211,211, 0.1);
+}
+mat-label{
+    
+    color: navy;
+    font-weight: bolder;
+}
+mat-error{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font: 1rem sans-serif;
+    color: #dd2c00;
+}
+.warning{
+    color: #00695c;
+}

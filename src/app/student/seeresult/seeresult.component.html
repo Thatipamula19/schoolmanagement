@@ -1,0 +1,107 @@
+<div class="container-fuild mt-4">
+    <h1>Student Result</h1>
+    <div class="row">
+        <form [formGroup]="resultForm" (submit)="seeResult(resultForm.value)">
+            <div class="col-sm-4 text-center">
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Id</mat-label>
+                    <input matInput type="number" formControlName="studentid" placeholder="Enter Student Id" required>
+                </mat-form-field>
+                <br><br>
+                <button mdbBtn type="submit" gradient="aqua" rounded="true" mdbWavesEffect>Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Table Start-->
+    <div class="container">
+        <div class="row" *ngFor="let rst of result">
+            <div class="col-lg-8">
+                <table class=" table table-bordered table-striped table-hover table-light">
+                    <tr>
+                        <th colspan="2" class="text-center bg-info"><b>Student Result</b></th>
+                    </tr>
+                    <tr>
+                        <th>Student Id</th>
+                        <td>
+                            {{rst.studentid}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>
+                            {{rst.stdname}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Class</th>
+                        <td>
+                            {{rst.stdclass}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Telugu</th>
+                        <td>
+                            {{rst.telugu}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Hindi</th>
+                        <td>
+                            {{rst.hindi}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>English</th>
+                        <td>
+                            {{rst.english}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Maths</th>
+                        <td>
+                            {{rst.maths}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Science</th>
+                        <td>
+                            {{rst.science}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Scoial</th>
+                        <td>
+                            {{rst.social}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>
+                            {{total}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Precentage</th>
+                        <td>
+                            {{precentage}} %
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th></th>
+                        <td>
+                            <a class="btn btn-info" [routerLink]="['/editresult', rst.studentid]">Edit
+                            </a>
+                            <a class="btn btn-danger" *ngIf="adiminId" (click)="deleteResult(rst.studentid)">Delete</a>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Table End-->
+</div>

@@ -1,0 +1,96 @@
+<div class="container">
+    <h1 class="h1 text-info text-center mt-4">Adimision Form</h1>
+    <form [formGroup]="adimisionform" (submit)="newAdimison(adimisionform.value)">
+        <div class="row">
+            <div class="col-sm-6 empControls">
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Id</mat-label>
+                    <input matInput type="text" formControlName="studentid" placeholder="Enter Student Id" required>
+                    <mat-error *ngIf="adimisionform.get('studentid').errors?.required">Please Enter Student Id
+                    </mat-error>
+                    <mat-error class="warning" *ngIf="adimisionform.get('studentid').errors?.minlength">
+                        Please Enter Minimum 3 Charectors
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Name</mat-label>
+                    <input matInput type="text" formControlName="stdname" placeholder="Enter Student Name" required>
+                    <mat-error *ngIf="adimisionform.get('stdname').errors?.required">Please Enter Student FullName
+                    </mat-error>
+                    <mat-error class="warning" class="text-info" *ngIf="adimisionform.get('stdname').errors?.minlength">
+                        Please Enter Minimum 3 Charector
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Father Name</mat-label>
+                    <input matInput type="text" formControlName="stdfathername" placeholder="Enter Father Name"
+                        required>
+                    <mat-error *ngIf="adimisionform.get('stdfathername').errors?.required">Please Enter Student Father
+                        Name
+                    </mat-error>
+                    <mat-error class="warning" *ngIf="adimisionform.get('stdfathername').errors?.minlength">
+                        Please Enter Minimum 3 Charector
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="stdgender">
+                        <mat-option *ngFor="let gen of gender" [value]="gen">{{gen}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="adimisionform.get('stdgender').errors?.required">Please Select Gender
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Date of Birth</mat-label>
+                    <input matInput type="date" formControlName="stddob" placeholder="Student Date of Birth" required>
+                    <mat-error *ngIf="adimisionform.get('stddob').errors?.required">Please Select Date of Birth
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6 empControls">
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile</mat-label>
+                    <input matInput type="number" formControlName="stdmobile" maxlength="10"
+                        placeholder="Enter Mobile Number" required>
+                    <mat-error *ngIf="adimisionform.get('stdmobile').errors?.required">
+                        Please Enter Mobile Number
+                    </mat-error>
+                    <mat-error class="warning" *ngIf="adimisionform.get('stdmobile').errors?.pattern">
+                        Please Enter 10 Numbers only
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="stdemail" placeholder="Enter Email Address" required>
+                    <mat-error *ngIf="adimisionform.get('stdemail').errors?.required">
+                        Please Enter E-mail
+                    </mat-error>
+                    <mat-error class="warning" *ngIf="adimisionform.get('stdemail').errors?.pattern">
+                        Please Enter E-mail in Courrect Format
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>class</mat-label>
+                    <mat-select formControlName="stdclass">
+                        <mat-option *ngFor="let class of classes" [value]="class">{{class}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="adimisionform.get('stdclass').errors?.required">Please Select Class
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Address</mat-label>
+                    <input matInput type="text" formControlName="stdaddress" placeholder="Enter Student Address"
+                        required>
+                    <mat-error *ngIf="adimisionform.get('stdaddress').errors?.required">
+                        Please Enter Student Full Address
+                    </mat-error>
+                </mat-form-field>
+                <div>
+                    <button mdbBtn type="submit" color="default" [outline]="true" class=""
+                        mdbWavesEffect>Subimt</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

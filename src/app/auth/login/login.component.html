@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Employee Login</h1>
+        <form [formGroup]="employeeLogin" (submit)="Login(employeeLogin.value)">
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>User Name</mat-label>
+                    <input matInput type="text" formControlName="username" placeholder="Enter User Name" required>
+                    <mat-error *ngIf="employeeLogin.get('username').errors?.required">Please Enter User Name
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Enter Password" required>
+                    <mat-error *ngIf="employeeLogin.get('password').errors?.required">Please Enter Password
+                    </mat-error>
+                </mat-form-field>
+                <div>
+                    <button mdbBtn type="submit" color="default" [rounded]="true" mdbWavesEffect>Subimt</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

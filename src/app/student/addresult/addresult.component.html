@@ -1,0 +1,97 @@
+<div class="container">
+    <h1 class="h1 text-info text-center mt-4">Add Student Result</h1>
+    <form [formGroup]="resultForm" (submit)="addResult(resultForm.value)">
+        <div class="row">
+            <div class="col-sm-6 empControls">
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Id</mat-label>
+                    <input matInput type="text" formControlName="studentid" placeholder="Enter Student Id" required>
+                    <mat-error *ngIf="resultForm.get('studentid').errors?.required">Please Enter Student Id
+                    </mat-error>
+                    <mat-error class="warning" *ngIf="resultForm.get('studentid').errors?.minlength">
+                        Please Enter Minimum 3 Charectors
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Name</mat-label>
+                    <input matInput type="text" formControlName="stdname" placeholder="Enter Student Name" required>
+                    <mat-error *ngIf="resultForm.get('stdname').errors?.required">Please Enter Student FullName
+                    </mat-error>
+                    <mat-error class="warning" *ngIf="resultForm.get('stdname').errors?.minlength">
+                        Please Enter Minimum 3 Charector
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Class</mat-label>
+                    <mat-select formControlName="stdclass" required>
+                        <mat-option *ngFor="let class of classes" [value]="class">{{class}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="resultForm.get('stdclass').errors?.required">Please Select Student Class
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Telugu</mat-label>
+                    <input matInput type="number" formControlName="telugu" placeholder="Enter Telugu Marks" required>
+                    <mat-error *ngIf="resultForm.get('telugu').errors?.required">Please Enter Telugu Marks
+                    </mat-error>
+                    <mat-error class="warning" class="text-info" *ngIf="resultForm.get('telugu').errors?.minlength">
+                        Please Enter 2 Numbers only
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Hindi</mat-label>
+                    <input matInput type="number" formControlName="hindi" placeholder="Enter Hindi Marks" required>
+                    <mat-error *ngIf="resultForm.get('hindi').errors?.required">Please Enter Hindi Marks
+                    </mat-error>
+                    <mat-error class="warning" class="text-info" *ngIf="resultForm.get('hindi').errors?.minlength">
+                        Please Enter 2 Numbers only
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6 empControls">
+                <mat-form-field appearance="outline">
+                    <mat-label>English</mat-label>
+                    <input matInput type="number" formControlName="english" placeholder="Enter English Marks" required>
+                    <mat-error *ngIf="resultForm.get('english').errors?.required">Please Enter English Marks
+                    </mat-error>
+                    <mat-error class="warning" class="text-info" *ngIf="resultForm.get('english').errors?.minlength">
+                        Please Enter 2 Numbers only
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Maths</mat-label>
+                    <input matInput type="number" formControlName="maths" placeholder="Enter Maths Marks" required>
+                    <mat-error *ngIf="resultForm.get('maths').errors?.required">Please Enter Maths Marks
+                    </mat-error>
+                    <mat-error class="warning" class="text-info" *ngIf="resultForm.get('maths').errors?.minlength">
+                        Please Enter 2 Numbers only
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Science</mat-label>
+                    <input matInput type="number" formControlName="science" placeholder="Enter Science Marks" required>
+                    <mat-error *ngIf="resultForm.get('science').errors?.required">Please Enter Science Marks
+                    </mat-error>
+                    <mat-error class="warning" class="text-info" *ngIf="resultForm.get('science').errors?.minlength">
+                        Please Enter 2 Numbers only
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Social</mat-label>
+                    <input matInput type="number" formControlName="social" placeholder="Enter Social Marks" required>
+                    <mat-error *ngIf="resultForm.get('social').errors?.required">Please Enter Social Marks
+                    </mat-error>
+                    <mat-error class="warning" class="text-info" *ngIf="resultForm.get('social').errors?.minlength">
+                        Please Enter 2 Numbers only
+                    </mat-error>
+                </mat-form-field>
+                <div>
+                    <button mdbBtn type="submit" color="default" [outline]="true" class="" mdbWavesEffect
+                        [disabled]="!resultForm.valid">Subimt</button>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>

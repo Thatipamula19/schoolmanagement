@@ -1,0 +1,79 @@
+<div class="container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div class="row" *ngFor="let ad of studentFees">
+        <div class="col-lg-8" *ngIf="!isLoading">
+            <table class=" table table-bordered border-primary table-striped table-hover table-light">
+                <tr>
+                    <th colspan="2" class="text-center bg-info"><b>Student Fees</b></th>
+                </tr>
+                <tr>
+                    <th>Student Id</th>
+                    <td>
+                        {{ad.studentid}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>
+                        {{ad.stdname}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>FatherName</th>
+                    <td>
+                        {{ad.stdfathername}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Class</th>
+                    <td>
+                        {{ad.stdclass}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Mobile</th>
+                    <td>
+                        {{ad.stdmobile}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Total Amount Rs.</th>
+                    <td>
+                        {{ad.totalamount}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Paid Amount Rs.</th>
+                    <td>
+                        {{ad.paidamount}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Fees Term</th>
+                    <td>
+                        {{ad.feeterm}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Payment Mode</th>
+                    <td>
+                        {{ad.paymentmode}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Payment Date</th>
+                    <td>
+                        {{ad.paymentdate}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Balance</th>
+                    <td>
+                        {{feebalance}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

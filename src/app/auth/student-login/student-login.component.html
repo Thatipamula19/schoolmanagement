@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Student Login</h1>
+        <form [formGroup]="studentLogin" (submit)="Login(studentLogin.value)">
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Student Id</mat-label>
+                    <input matInput type="text" formControlName="studentid" placeholder="Enter Student Id" required>
+                    <mat-error *ngIf="studentLogin.get('studentid').errors?.required">Please Enter Student Id
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput type="date" formControlName="stddob" placeholder="Enter Student Date of Birth"
+                        required>
+                    <mat-error *ngIf="studentLogin.get('stddob').errors?.required">Please Enter Student Date of Birth
+                    </mat-error>
+                </mat-form-field>
+                <div>
+                    <button mdbBtn type="submit" color="default" [rounded]="true" mdbWavesEffect>Subimt</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

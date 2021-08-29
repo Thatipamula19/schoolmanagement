@@ -1,0 +1,86 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-xl  sticky-top navbar-dark indigo">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand waves-light" routerLink="/" mdbWavesEffect>Home</a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" *ngIf="employeeId || adiminId" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Student Records<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" routerLink="/adimision" mdbWavesEffect>Adimision</a>
+                    <a class="dropdown-item waves-light" routerLink="/stddetails" mdbWavesEffect>Student Details</a>
+                </div>
+            </li>
+
+
+            <li class="nav-item" *ngIf="studentId">
+                <a class="nav-link waves-light" routerLink="/studentdetail" mdbWavesEffect>Student Details</a>
+            </li>
+
+            <!-- Student Result -->
+            <li class="nav-item dropdown" *ngIf="employeeId || adiminId" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Student Result<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" routerLink="/addresult" mdbWavesEffect>Add Result</a>
+                    <a class="dropdown-item waves-light" routerLink="/seeresult" mdbWavesEffect>See Result</a>
+                </div>
+            </li>
+
+
+
+            <li class="nav-item" *ngIf="studentId">
+                <a class="nav-link waves-light" routerLink="/studentresult" mdbWavesEffect>Student Result</a>
+            </li>
+
+            <!-- Student Fees -->
+            <li class="nav-item dropdown" *ngIf="employeeId || adiminId" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Student Fees<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" routerLink="/addfees" mdbWavesEffect>Add Fees</a>
+                    <a class="dropdown-item waves-light" routerLink="/seefees" mdbWavesEffect>See Fees</a>
+                </div>
+            </li>
+
+
+            <li class="nav-item" *ngIf="studentId">
+                <a class="nav-link waves-light" routerLink="/studentfees" mdbWavesEffect>Student Fees</a>
+            </li>
+
+            <li class="nav-item" *ngIf="adiminId">
+                <a class="nav-link waves-light" routerLink="/addemployee" mdbWavesEffect>Add Employee</a>
+            </li>
+
+            <li class="nav-item" *ngIf="!employeeId && !studentId && !adiminId ">
+                <a class="nav-link waves-light" routerLink="/loginpage" mdbWavesEffect>Login</a>
+            </li>
+
+            <li class="nav-item" *ngIf="employeeId">
+                <a class="nav-link waves-light" (click)="employeelogout()" mdbWavesEffect>LogOut</a>
+            </li>
+
+            <li class="nav-item" *ngIf="studentId">
+                <a class="nav-link waves-light" (click)="studentlogout()" mdbWavesEffect>LogOut</a>
+            </li>
+
+            <li class="nav-item" *ngIf="adiminId">
+                <a class="nav-link waves-light" (click)="adiminlogout()" mdbWavesEffect>LogOut</a>
+            </li>
+        </ul>
+
+
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
