@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdiminLoginService } from 'src/app/adimin/adimin-login.service';
 import { Adimision } from '../models/adimision.model';
@@ -21,25 +21,32 @@ export class StudentdetailsComponent implements OnInit, OnDestroy {
   adimisioncount: number;
   adiminId: string;
   detailForm: FormGroup;
+  studentid:any;
 
 
   private adimisionsSubs: Subscription;
-  constructor(private adimisionService: StudentadimisionService, private adiminService: AdiminLoginService) { }
+  constructor(private adimisionService: StudentadimisionService, private adiminService: AdiminLoginService, private activeRouter: ActivatedRoute) { }
 
   ngOnInit() {
-
-    this.adiminId = this.adiminService.getadiminId();
 
     this.detailForm = new FormGroup({
       studentid: new FormControl(null, Validators.required)
     })
+    this.adiminId = this.adiminService.getadiminId();
+
+    this.studentid = this.activeRouter.snapshot.params['id'];
+    console.log(this.studentid);
+    if(this.studentid){
+      this.detailForm.setValue({
+        studentid : this.studentid
+      })
+      this.SearchStudent(this.studentid);
+    }
     this.adimisionService.getAdimisions();
     this.adimisionsSubs = this.adimisionService.getAdimisionUpdateListener()
       .subscribe((adimisions: Adimision[]) => {
         this.adimisions = adimisions;
       });
-
-
   }
 
 
@@ -48,13 +55,30 @@ export class StudentdetailsComponent implements OnInit, OnDestroy {
   // }
 
 
-  Search(form) {
+  Search(id) {
     if (this.detailForm.invalid) {
       return;
 
     }
     this.isLoading = true;
     this.adimisionService.getAdimision(this.detailForm.value.studentid).subscribe(
+
+      adimision => {
+        this.isLoading = false;
+        this.adimision = [adimision];
+        this.adimisioncount = (adimision as any).length;
+      }
+    )
+    this.detailForm.reset();
+  }
+
+  SearchStudent(id) {
+    if (this.detailForm.invalid) {
+      return;
+
+    }
+    this.isLoading = true;
+    this.adimisionService.getAdimision(id).subscribe(
 
       adimision => {
         this.isLoading = false;

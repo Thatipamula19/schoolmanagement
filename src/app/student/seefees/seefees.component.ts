@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdiminLoginService } from 'src/app/adimin/adimin-login.service';
 import { Fees } from '../models/fees.model';
@@ -18,8 +19,9 @@ export class SeefeesComponent implements OnInit, OnDestroy {
   feesSubs: Subscription;
   feebalance: number;
   adiminId: string;
+  studentid:any;
 
-  constructor(private feesService: FeesService, private adiminService: AdiminLoginService) { }
+  constructor(private feesService: FeesService, private adiminService: AdiminLoginService, private activeRouter: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -27,6 +29,15 @@ export class SeefeesComponent implements OnInit, OnDestroy {
     this.feesForm = new FormGroup({
       studentid: new FormControl(null, Validators.required)
     });
+
+    this.studentid = this.activeRouter.snapshot.params['id'];
+    console.log(this.studentid);
+    if(this.studentid){
+      this.feesForm.setValue({
+        studentid : this.studentid
+      })
+      this.SearchFees(this.studentid);
+    }
 
 
     this.feesSubs = this.feesService.getFeesUpdateListener()
@@ -41,6 +52,19 @@ export class SeefeesComponent implements OnInit, OnDestroy {
       return;
     }
     this.feesService.getFees(this.feesForm.value.studentid)
+      .subscribe(feees => {
+        this.fees = [feees];
+        this.feebalance = feees.totalamount - feees.paidamount;
+      })
+
+    this.feesForm.reset();
+  }
+
+  SearchFees(id) {
+    if (this.feesForm.invalid) {
+      return;
+    }
+    this.feesService.getFees(id)
       .subscribe(feees => {
         this.fees = [feees];
         this.feebalance = feees.totalamount - feees.paidamount;

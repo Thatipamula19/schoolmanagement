@@ -1,14 +1,18 @@
 const bcrypt = require("bcryptjs");
 const { sign } = require("crypto");
 const jwt = require("jsonwebtoken");
+const generateUniqueId = require('generate-unique-id');
 
 const Adimision = require("../models/adimision");
 
 exports.createAdimision = (req, res, next) => {
     // const url = req.protocal + "://" + req.get("host");
-
+    const id = generateUniqueId({
+        length: 5,
+        useLetters: false
+      });
     const adimision = new Adimision({
-        studentid: req.body.studentid,
+        studentid: id,
         stdname: req.body.stdname,
         stdfathername: req.body.stdfathername,
         stdgender: req.body.stdgender,
@@ -35,7 +39,8 @@ exports.createAdimision = (req, res, next) => {
                     adimision: {
                         ...createdAdimsion,
                         id: createdAdimsion._id
-                    }
+                    },
+                    studentid: createdAdimsion._doc.studentid
                 })
             });
 
@@ -97,6 +102,25 @@ exports.getAdimision = (req, res, next) => {
         }
         else {
             res.status(404).json({
+                message: "No Record Found"
+
+            })
+        }
+    }).catch(err => {
+        res.status(500).json({
+            message: "Adimision Fetched Failed!"
+        });
+    });
+}
+
+exports.checkDetails = (req, res, next) => {
+    const query = Adimision.findOne({ "studentid": req.params.studentid })
+    query.then(adimision => {
+        if (adimision) {
+            res.status(200).json(adimision)
+        }
+        else {
+            res.status(201).json({
                 message: "No Record Found"
 
             })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ResultService } from '../services/result.service';
+import { StudentadimisionService } from '../services/studentadimision.service';
 
 @Component({
   selector: 'app-addresult',
@@ -15,10 +16,11 @@ export class AddresultComponent implements OnInit {
   resultForm: FormGroup;
 
   private studentid: string;
-  private mode = 'create';
+  mode = 'create';
   resultid: string;
+  isAdimision:boolean = true;
 
-  constructor(private resultService: ResultService, private activeRouter: ActivatedRoute) { }
+  constructor(private resultService: ResultService, private activeRouter: ActivatedRoute, private adimisionService: StudentadimisionService) { }
 
   ngOnInit() {
     this.resultForm = new FormGroup({
@@ -93,6 +95,19 @@ export class AddresultComponent implements OnInit {
         this.resultForm.value.social,
       )
     }
+  }
+
+  checkSutdent($event){
+    this.adimisionService.checkDetails($event.target.value).subscribe((res:any)=>{
+      console.log(res.message);
+      if(res.message === "No Record Found"){
+        this.isAdimision = false;
+      } else{
+        this.isAdimision = true;
+        this.resultForm.get('stdname')?.setValue(res?.stdname);
+        this.resultForm.get('stdclass')?.setValue(res?.stdclass);
+      }
+    })
   }
 
 

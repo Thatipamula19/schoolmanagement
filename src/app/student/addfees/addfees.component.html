@@ -101,12 +101,15 @@
 </div> -->
 
 <div class="container">
+    <h1 class="h1 text-info text-center mt-4" *ngIf="mode ==='create'">Add Student Fees</h1>
+    <h1 class="h1 text-info text-center mt-4" *ngIf="mode ==='edit'">Update Student Fees</h1>
+    <h1 class="h1 text-center text-danger mt-4" *ngIf="!isAdimision">Student is not Taken Admision</h1>
     <form [formGroup]="feesForm" (submit)="addFees(feesForm.value)">
         <div class="row">
             <div class="col-sm-6 empControls">
                 <mat-form-field appearance="outline">
                     <mat-label>Student Id</mat-label>
-                    <input matInput type="number" formControlName="studentid" placeholder="Enter Student Id" required>
+                    <input matInput type="number" formControlName="studentid" placeholder="Enter Student Id" (change)="checkSutdent($event)" required>
                     <mat-error *ngIf="feesForm.get('studentid').errors?.required">Please Enter Student Id
                     </mat-error>
                     <mat-error class="warning" *ngIf="feesForm.get('studentid').errors?.minlength">
@@ -190,8 +193,10 @@
                     </mat-error>
                 </mat-form-field>
                 <div>
-                    <button mdbBtn type="submit" color="default" [outline]="true" class=""
-                        mdbWavesEffect>Subimt</button>
+                    <button *ngIf="mode ==='create'" mdbBtn type="submit" color="default" [outline]="true" class=""
+                        mdbWavesEffect [disabled]="!feesForm.valid || !isAdimision">Subimt</button>
+                    <button *ngIf="mode ==='edit'" mdbBtn type="submit" color="default" [outline]="true" class=""
+                        mdbWavesEffect [disabled]="!feesForm.valid || !isAdimision">Update</button>
                 </div>
 
             </div>

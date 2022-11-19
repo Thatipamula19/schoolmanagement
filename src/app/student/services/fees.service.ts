@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SuccessComponent } from 'src/app/common/success/success.component';
 import { environment } from 'src/environments/environment';
 import { Fees } from '../models/fees.model';
 
@@ -15,7 +18,7 @@ export class FeesService {
   private feeses: Fees[] = [];
   private updateFeeses = new Subject<Fees[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private dialog: MatDialog, private router: Router) { }
 
   getFeeses() {
     this.http.get<{ message: string, feeses: any }>(BackEndUrl)
@@ -65,6 +68,10 @@ export class FeesService {
         const stdid = responseData.studentid;
         this.feeses.push(fees);
         this.updateFeeses.next([...this.feeses]);
+        let dialogRef = this.dialog.open(SuccessComponent, { data: { message: responseData?.message } });
+        dialogRef.afterClosed().subscribe(()=>{
+          this.router.navigate(['/seefees', studentid]);
+         })
       });
   }
 
@@ -79,15 +86,23 @@ export class FeesService {
         const stdid = updatedata.studentid;
         this.feeses.push(fees);
         this.updateFeeses.next([...this.feeses]);
+        let dialogRef = this.dialog.open(SuccessComponent, { data: { message: updatedata?.message } });
+        dialogRef.afterClosed().subscribe(()=>{
+          this.router.navigate(['/seefees', studentid]);
+         })
       })
   }
 
   deleteFees(studentid: string) {
     this.http.delete<{ message: string, studentid: string }>(BackEndUrl + studentid)
-      .subscribe(() => {
+      .subscribe((res:any) => {
         const updatedFees = this.feeses.filter(fees => fees.studentid !== studentid);
         this.feeses = updatedFees;
         this.updateFeeses.next([...this.feeses]);
+        let dialogRef = this.dialog.open(SuccessComponent, { data: { message: res?.message } })
+        dialogRef.afterClosed().subscribe(()=>{
+          this.router.navigate(['/']);
+         })
       })
   }
 }

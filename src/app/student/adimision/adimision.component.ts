@@ -17,7 +17,7 @@ export class AdimisionComponent implements OnInit {
 
   private studentid: string;
   isLoading = false;
-  private mode = 'create';
+  mode = 'create';
 
   classes: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
   gender: string[] = ['Male', 'Female'];
@@ -26,7 +26,7 @@ export class AdimisionComponent implements OnInit {
   ngOnInit() {
 
     this.adimisionform = new FormGroup({
-      studentid: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
+      studentid: new FormControl(null),
       stdname: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
       stdfathername: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
       stdgender: new FormControl(null, { validators: [Validators.required] }),

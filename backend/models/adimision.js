@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const adimisionSchema = mongoose.Schema({
-    studentid: { type: String, required: true },
+    studentid: { type: String, required: false },
     stdname: { type: String, required: true },
     stdfathername: { type: String, required: true },
     stdgender: { type: String, required: true },

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FeesService } from '../services/fees.service';
+import { StudentadimisionService } from '../services/studentadimision.service';
 
 @Component({
   selector: 'app-addfees',
@@ -18,9 +19,9 @@ export class AddfeesComponent implements OnInit {
   feesid: string;
   mode = 'create';
   isLoading = false;
+  isAdimision:boolean = true;
 
-
-  constructor(private feesService: FeesService, private activeRouter: ActivatedRoute) { }
+  constructor(private feesService: FeesService, private activeRouter: ActivatedRoute, private adimisionService: StudentadimisionService) { }
 
   ngOnInit() {
     this.feesForm = new FormGroup({
@@ -96,6 +97,21 @@ export class AddfeesComponent implements OnInit {
       )
     }
     this.feesForm.reset();
+  }
+
+  checkSutdent($event){
+    this.adimisionService.checkDetails($event.target.value).subscribe((res:any)=>{
+      console.log(res.message);
+      if(res.message === "No Record Found"){
+        this.isAdimision = false;
+      } else{
+        this.isAdimision = true;
+        this.feesForm.get('stdname')?.setValue(res?.stdname);
+        this.feesForm.get('stdfathername')?.setValue(res?.stdfathername);
+        this.feesForm.get('stdclass')?.setValue(res?.stdclass);
+        this.feesForm.get('stdmobile')?.setValue(res?.stdmobile);
+      }
+    })
   }
 
 }

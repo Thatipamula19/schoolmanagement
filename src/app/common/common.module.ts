@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ErrorComponent } from './error/error.component';
+import { SuccessComponent } from './success/success.component';
 
 
 
@@ -15,7 +16,8 @@ import { ErrorComponent } from './error/error.component';
     HomeComponent,
     AboutComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    SuccessComponent
   ],
   imports: [
     CommonModule, BrowserAnimationsModule, MaterialModule,

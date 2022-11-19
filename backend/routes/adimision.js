@@ -12,6 +12,8 @@ router.get("", adimisionController.getAdimisions);
 
 router.get("/:studentid", adimisionController.getAdimision);
 
+router.get("/checkDetails/:studentid", adimisionController.checkDetails);
+
 router.delete("/:studentid", adimisionController.deleteAdimision);
 
 router.post("/login", adimisionController.studentLogin);

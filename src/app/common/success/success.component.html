@@ -1,0 +1,18 @@
+<div class="modal-dialog modal-notify modal-warning" role="document">
+    <div class="modal-header">
+        <h1 class="heading lead"> Data Added Successfully!</h1>
+    </div>
+    <div mat-dialog-content class="mt-4">
+        <!-- <p class="mat-body-1"> {{data.message}} </p> -->
+        <div class="text-center mat-body-1">
+            <mdb-icon fas icon="check-circle" size="4x" class="mb-3 animated rotateIn"></mdb-icon>
+            <p>{{data.message}}</p>
+            <p *ngIf="data?.studentid"><strong>StudentId:</strong>{{data?.studentid}}</p>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer justify-content-center">
+    <button mat-dialog-close type="button" mdbBtn color="warning" outline="true" class="waves-effect"
+        mdbWavesEffect>Okay</button>
+</div>

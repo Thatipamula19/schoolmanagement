@@ -1,9 +1,10 @@
 <div class="container">
-    <h1 class="h1 text-info text-center mt-4">Adimision Form</h1>
+    <h1 class="h1 text-info text-center mt-4" *ngIf="mode ==='create'">Adimision Form</h1>
+    <h1 class="h1 text-info text-center mt-4" *ngIf="mode ==='edit'"> Update Adimision Form</h1>
     <form [formGroup]="adimisionform" (submit)="newAdimison(adimisionform.value)">
         <div class="row">
             <div class="col-sm-6 empControls">
-                <mat-form-field appearance="outline">
+                <!-- <mat-form-field appearance="outline">
                     <mat-label>Student Id</mat-label>
                     <input matInput type="text" formControlName="studentid" placeholder="Enter Student Id" required>
                     <mat-error *ngIf="adimisionform.get('studentid').errors?.required">Please Enter Student Id
@@ -11,7 +12,7 @@
                     <mat-error class="warning" *ngIf="adimisionform.get('studentid').errors?.minlength">
                         Please Enter Minimum 3 Charectors
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
                 <mat-form-field appearance="outline">
                     <mat-label>Student Name</mat-label>
                     <input matInput type="text" formControlName="stdname" placeholder="Enter Student Name" required>
@@ -87,8 +88,10 @@
                     </mat-error>
                 </mat-form-field>
                 <div>
-                    <button mdbBtn type="submit" color="default" [outline]="true" class=""
+                    <button *ngIf="mode ==='create'" mdbBtn type="submit" color="default" [outline]="true" class=""
                         mdbWavesEffect>Subimt</button>
+                     <button *ngIf="mode ==='edit'" mdbBtn type="submit" color="default" [outline]="true" class=""
+                        mdbWavesEffect>Update</button>
                 </div>
             </div>
         </div>

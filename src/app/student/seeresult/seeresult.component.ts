@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdiminLoginService } from 'src/app/adimin/adimin-login.service';
 import { Result } from '../models/result.model';
@@ -19,10 +20,9 @@ export class SeeresultComponent implements OnInit, OnDestroy {
   nbrresult: number = 0;
   private resultSubs: Subscription;
   adiminId: string;
-
-
   resultForm: FormGroup;
-  constructor(private resultService: ResultService, private adiminService: AdiminLoginService) { }
+  studentid:any;
+  constructor(private resultService: ResultService, private adiminService: AdiminLoginService, private activeRouter: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -31,6 +31,15 @@ export class SeeresultComponent implements OnInit, OnDestroy {
     this.resultForm = new FormGroup({
       studentid: new FormControl(null, Validators.required)
     })
+
+    this.studentid = this.activeRouter.snapshot.params['id'];
+    console.log(this.studentid);
+    if(this.studentid){
+      this.resultForm.setValue({
+        studentid : this.studentid
+      })
+      this.SearchResult(this.studentid);
+    }
     this.resultService.getResults();
     this.resultSubs = this.resultService.getResultUpadateListener()
       .subscribe((results: Result[]) => {
@@ -45,6 +54,26 @@ export class SeeresultComponent implements OnInit, OnDestroy {
       return;
     };
     this.resultService.getResult(this.resultForm.value.studentid)
+      .subscribe(result => {
+        console.log(result);
+
+        this.result = [result];
+
+        this.nbrresult = ([result] as any[]).length;
+
+
+
+        this.total = result.telugu + result.hindi + result.english + result.maths + result.science + result.social;
+        this.precentage = this.total / 6;
+
+      })
+  }
+
+  SearchResult(id) {
+    if (this.resultForm.invalid) {
+      return;
+    };
+    this.resultService.getResult(id)
       .subscribe(result => {
         console.log(result);
 

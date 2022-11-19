@@ -11,7 +11,7 @@ const adiminRouters = require("./routes/adimin");
 
 const app = express();
 
-mongoose.connect("mongodb+srv://school:school1996@cluster0.8hsdk.mongodb.net/schooldata?retryWrites=true&w=majority")
+mongoose.connect("mongodb://localhost:27017/school")
     .then(() => {
         console.log("Conneted to Database!");
     })
